@@ -1,12 +1,12 @@
 
 
-export const Game = (props) => {
-      return (
+export const Game = ({ imageUrl, title, _id }) => {
+    return (
         <div className="game">
             <div className="image-wrap">
-                <img src={props.imageUrl} />
+                <img src={imageUrl} />
             </div>
-            <h3>{props.imageUrl}</h3>
+            <h3>{title}</h3>
             <div className="rating">
                 <span>☆</span>
                 <span>☆</span>
@@ -15,7 +15,7 @@ export const Game = (props) => {
                 <span>☆</span>
             </div>
             <div className="data-buttons">
-                <a href={`/${props._id}`} className="btn details-btn">
+                <a href={`/${_id}`} className="btn details-btn">
                     Details
                 </a>
             </div>
