@@ -1,9 +1,13 @@
+import { loginHandler } from "../../services/authService"
 
 
 export const Login = () => {
+
+
+
     return (
         <section id="login-page" className="auth">
-            <form id="login">
+            <form id="login" onSubmit={loginHandler}>
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Login</h1>
