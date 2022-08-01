@@ -1,13 +1,15 @@
 import { loginHandler } from "../../services/authService"
-
+import { useContext } from "react"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export const Login = () => {
 
+    const { saveUser } = useContext(AuthContext)
 
 
     return (
         <section id="login-page" className="auth">
-            <form id="login" onSubmit={loginHandler}>
+            <form id="login" onSubmit={(e) => loginHandler(e, saveUser)}>
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Login</h1>
