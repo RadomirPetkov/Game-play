@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react"
-import { getAll } from "../../services/gameService"
+
 import { Game } from "./Game/Game"
 
 
 
-export const Home = () => {
-    const [games, setGames] = useState([])
-
-    useEffect(() => {
-        getAll()
-            .then(res => setGames(res))
-    }, [])
-
+export const Home = ({games}) => {
 
     return (
 
@@ -33,7 +25,7 @@ export const Home = () => {
 
 
                 {/* Display paragraph: If there is no games  */}
-                {games.length == 0 &&
+                {games.length === 0 &&
                     <p className="no-articles">No games yet</p>}
             </div>
         </section>

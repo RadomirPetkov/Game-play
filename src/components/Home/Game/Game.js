@@ -15,7 +15,7 @@ export const Game = ({ imageUrl, title, _id }) => {
                 <span>☆</span>
             </div>
             <div className="data-buttons">
-                <a href={`/${_id}`} className="btn details-btn">
+                <a href={`details/${_id}`} className="btn details-btn">
                     Details
                 </a>
             </div>
