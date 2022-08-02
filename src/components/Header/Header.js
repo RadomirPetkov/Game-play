@@ -15,6 +15,8 @@ export const Header = () => {
                 </Link>
             </h1>
             <nav>
+                {user.email && <span>{user.email}</span>}
+
                 <Link to="/catalog">All games</Link>
                 {/* Logged-in users */}
                 {user.accessToken ? (<div id="user">

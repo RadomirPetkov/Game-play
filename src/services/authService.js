@@ -7,7 +7,7 @@ export const loginHandler = async (e, saveUser, navigate) => {
 
     try {
         const loginInfo = await request.post(`/users/login`, { email, password })
-        console.log(`Succsessful login as: ${loginInfo.email}`);
+     
         saveUser(loginInfo)
         navigate(`/`)
 

@@ -10,14 +10,22 @@ import { useEffect, useState } from "react"
 import { getAll } from "./services/gameService"
 import { Detatils } from './components/Details/Details';
 import { AuthContext } from './contexts/AuthContext';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
 
   const [games, setGames] = useState([])
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(() => {
+    return JSON.parse(localStorage.getItem('user')) || "{}"
+  })
 
   const saveUser = (userData) => {
+    localStorage.setItem("user", JSON.stringify(userData))
+    console.log(`Succsessful login as: ${userData.email}`);
     setUser(userData)
+  }
+  const logoutUser = () => {
+    setUser({})
   }
 
   useEffect(() => {
@@ -27,7 +35,7 @@ function App() {
 
 
   return (
-    <AuthContext.Provider value={{ saveUser, user }}>
+    <AuthContext.Provider value={{ saveUser, user, logoutUser }}>
       <div className="App">
         <Header />
         <main id="main-content">
@@ -35,6 +43,7 @@ function App() {
             <Route path='/' element={<Home games={games} />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/logout' element={<Logout />} />
             <Route path='/create' element={<CreateGame />} />
             <Route path='/catalog' element={<Catalog games={games} />} />
             <Route path={`/details/:gameId`} element={<Detatils />} />

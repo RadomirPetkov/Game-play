@@ -1,24 +1,35 @@
 const baseUrl = "http://localhost:3030"
 
-export const request = async (method, url, data) => {
+export const request = async (method, url, data, accessToken) => {
 
     try {
         let buildRequrest
+
+
+        let headers = {
+            "content-type": "application/json",
+        }
+        if (accessToken) {
+            headers["X-Authorization"] = accessToken
+        }
+        console.log(headers);
+
         if (method == "GET") {
-            buildRequrest = fetch(`${baseUrl}${url}`)
+            buildRequrest = fetch(`${baseUrl}${url}`, { headers })
         } else {
             buildRequrest = fetch(`${baseUrl}${url}`, {
                 method,
-                headers: {
-                    "content-type": "application/json"
-                },
+                headers,
                 body: JSON.stringify(data)
             })
         }
 
 
         const response = await buildRequrest
-        const res = await response.json()
+        let res
+        
+        if (response.status !== 204) {res = await response.json() }
+
         return res
 
     } catch (error) {
@@ -31,3 +42,4 @@ export const get = request.bind({}, "GET")
 export const put = request.bind({}, "PUT")
 export const del = request.bind({}, "DELETE")
 export const post = request.bind({}, "POST")
+export const logout = request.bind({}, "GET", "/users/logout", "",)
