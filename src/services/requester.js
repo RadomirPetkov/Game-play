@@ -12,7 +12,6 @@ export const request = async (method, url, data, accessToken) => {
         if (accessToken) {
             headers["X-Authorization"] = accessToken
         }
-        console.log(headers);
 
         if (method == "GET") {
             buildRequrest = fetch(`${baseUrl}${url}`, { headers })

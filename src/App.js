@@ -11,6 +11,7 @@ import { getAll } from "./services/gameService"
 import { Detatils } from './components/Details/Details';
 import { AuthContext } from './contexts/AuthContext';
 import { Logout } from './components/Logout/Logout';
+import { GameContext } from './contexts/GameContext';
 
 function App() {
 
@@ -33,26 +34,31 @@ function App() {
       .then(res => setGames(res))
   }, [])
 
+  const updateGames = (data) =>{
+    setGames(data)
+  }
 
   return (
     <AuthContext.Provider value={{ saveUser, user, logoutUser }}>
-      <div className="App">
-        <Header />
-        <main id="main-content">
-          <Routes>
-            <Route path='/' element={<Home games={games} />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/create' element={<CreateGame />} />
-            <Route path='/catalog' element={<Catalog games={games} />} />
-            <Route path={`/details/:gameId`} element={<Detatils />} />
-          </Routes>
+      <GameContext.Provider value={{games, updateGames}}>
+        <div className="App">
+          <Header />
+          <main id="main-content">
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/logout' element={<Logout />} />
+              <Route path='/create' element={<CreateGame />} />
+              <Route path='/catalog' element={<Catalog />} />
+              <Route path={`/details/:gameId`} element={<Detatils />} />
+            </Routes>
 
 
 
-        </main>
-      </div>
+          </main>
+        </div>
+      </GameContext.Provider>
     </AuthContext.Provider>
   );
 }
